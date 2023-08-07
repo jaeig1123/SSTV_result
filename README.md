@@ -46,9 +46,9 @@
 #### 5. VOD 업로드
 <div style="display: flex; justify-content: center;">
     <p align="center">
-      <img src="https://github.com/jcjee6276/sstv-result/assets/121541152/62bb0bc1-7569-4421-a00b-18c00619f3dc" alt="이미지1 대체 텍스트" style="flex: 1; margin: 100px;" width="280"/>
-      <img src="https://github.com/jcjee6276/sstv-result/assets/121541152/c95b7ca0-368c-49d9-84ab-9b5fe14bf1d2" alt="이미지1 대체 텍스트" style="flex: 1; margin: 100px;" width="280"/>
-      <img src="https://github.com/jcjee6276/sstv-result/assets/121541152/eb8ab368-c1f7-4e8c-b7a3-089bee123b16" alt="이미지1 대체 텍스트" style="flex: 1; margin: 100px;" width="280"/>
+      <img src="https://github.com/jcjee6276/sstv-result/assets/121541152/62bb0bc1-7569-4421-a00b-18c00619f3dc" alt="이미지1 대체 텍스트" style="flex: 1; margin: 100px;" width="380"/>
+      <img src="https://github.com/jcjee6276/sstv-result/assets/121541152/c95b7ca0-368c-49d9-84ab-9b5fe14bf1d2" alt="이미지1 대체 텍스트" style="flex: 1; margin: 100px;" width="380"/>
+      <img src="https://github.com/jcjee6276/sstv-result/assets/121541152/eb8ab368-c1f7-4e8c-b7a3-089bee123b16" alt="이미지1 대체 텍스트" style="flex: 1; margin: 100px;" width="380"/>
     </p>
   </div>
 
