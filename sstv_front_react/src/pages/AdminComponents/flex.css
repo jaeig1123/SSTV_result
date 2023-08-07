@@ -1,0 +1,15 @@
+.container {
+  display: flex;
+}
+
+.sidebar {
+  flex: 0 0 200px; /* SideBar 너비 조정 */
+}
+
+.content {
+  flex: 1; /* Content 영역이 남은 공간을 차지하도록 설정 */
+}
+
+.spacer {
+  /* 내용 상단 여백 스타일 */
+}

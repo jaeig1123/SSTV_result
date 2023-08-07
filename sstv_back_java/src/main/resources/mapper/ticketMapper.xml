@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- type에는 사용하려는 domain의 경로를 적어여한다. -->
+<mapper namespace="com.example.sstv.deal.DAO.TicketDAO">
+    <resultMap id="ticketSelectMap" type="com.example.sstv.deal.Ticket">
+        <result property="ticketNo" column="ticket_no" jdbcType="NUMERIC"/>
+        <result property="ticketStart" column="ticket_start" jdbcType="TIMESTAMP"/>
+        <result property="ticketEnd" column="ticket_end" jdbcType="TIMESTAMP"/>
+        <result property="ticketUse" column="ticket_use" jdbcType="NUMERIC"/>
+        <result property="ticketDate" column="ticket_date" jdbcType="TIMESTAMP"/>
+        <result property="userId" column="user_id" jdbcType="VARCHAR" />
+        <result property="ticketProdNo" column="ticket_prod_no" jdbcType="VARCHAR" />
+        <result property="coin" column="coin" jdbcType="NUMERIC" />
+        <result property="ticketName" column="ticket_name" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <resultMap id="userSelectMap" type="com.example.sstv.user.User">
+        <result property="userId" column="user_id" jdbcType="VARCHAR" />
+        <result property="coin" column="coin" jdbcType="NUMERIC" />
+        <result property="userNickname" column="user_nickname" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <resultMap id="ticketProductSelectMap" type="com.example.sstv.deal.TicketProduct">
+        <result property="ticketProdNo" column="ticket_prod_no" jdbcType="NUMERIC" />
+        <result property="ticketName" column="ticket_name" jdbcType="VARCHAR" />
+        <result property="price" column="price" jdbcType="NUMERIC" />
+    </resultMap>
+
+    <!--  이용권목록 -->
+    <select id="getTicketList" parameterType="String" resultMap="ticketSelectMap">
+        SELECT
+        t.ticket_no, t.ticket_date, tp.ticket_name, t.ticket_start, t.ticket_end, t.ticket_use, tp.ticket_prod_no ,
+        u.user_id, u.coin, u.user_nickname
+        FROM TICKET t
+        JOIN TICKET_PRODUCT tp ON t.TICKET_PROD_NO = tp.TICKET_PROD_NO
+        JOIN USER u ON t.user_id = u.user_id
+        WHERE
+        t.user_id = #{userId}
+        ORDER BY t.ticket_no ASC
+    </select>
+
+    <insert id="addTicket" parameterType="com.example.sstv.deal.Ticket">
+        INSERT
+        INTO TICKET (user_id, ticket_use, ticket_date, ticket_prod_no)
+        VALUES (#{userId}, 0, NOW(), #{ticketProdNo})
+    </insert>
+
+    <update id="useTicket" parameterType="com.example.sstv.deal.Ticket">
+        UPDATE TICKET
+        <set>
+            <if test="ticketUse == 0">
+                    ticket_use = 1,
+                    ticket_start = NOW(),
+                    <if test="ticketName == 1">
+                        ticket_end = DATE_ADD(NOW(), INTERVAL 7 DAY)
+                    </if>
+                    <if test="ticketName == 2">
+                        ticket_end = DATE_ADD(NOW(), INTERVAL 30 DAY)
+                    </if>
+            </if>
+        </set>
+        WHERE ticket_no = #{ticketNo}
+        <!--  ticketNo랑 ,ticketProdNo 가 업데이트 되어야 발동 -->
+    </update>
+
+
+
+
+</mapper>
+
+
+
+
+

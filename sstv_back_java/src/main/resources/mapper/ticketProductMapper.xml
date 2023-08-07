@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- type에는 사용하려는 domain의 경로를 적어여한다. -->
+<mapper namespace="com.example.sstv.deal.DAO.TicketProductDAO">
+
+    <resultMap id="TicketProductSelectMap" type="com.example.sstv.deal.TicketProduct">
+        <result property="ticketProdNo" 	column="ticket_prod_no" 			jdbcType="NUMERIC" />
+        <result property="ticketName" 		column="ticket_name" 			jdbcType="NUMERIC" />
+        <result property="price"     column="price"      jdbcType="NUMERIC" />
+    </resultMap>
+
+
+    <select id="getTicketProductAdminList"  resultMap="TicketProductSelectMap">
+        SELECT
+        *
+        FROM TICKET_PRODUCT
+    </select>
+
+    <select id="getTicketProductAdmin"  parameterType="int" resultMap="TicketProductSelectMap">
+        SELECT
+        *
+        FROM TICKET_PRODUCT
+        WHERE ticket_prod_no = #{ticketProdNo}
+        ORDER BY ticket_prod_no ASC
+    </select>
+
+    <insert id="addTicketProductAdmin" parameterType="com.example.sstv.deal.TicketProduct">
+        INSERT INTO TICKET_PRODUCT (ticket_prod_no,ticket_name,price)
+        VALUE( #{ticketProdNo}, #{ticketName},#{price})
+    </insert>
+
+
+<!--  foreign key   coinhistory  연동 ...  삭제가 안됨 상위테이블에서 삭제 불가능  -->
+    <delete id="removeTicketProductAdmin">
+        DELETE from TICKET_PRODUCT where ticket_prod_no = #{ticketProdNo}
+    </delete>
+<!-- 삭제가 안돼서 update 추가 -->
+    <update id="updateTicketProductAdmin" parameterType="com.example.sstv.deal.TicketProduct">
+        UPDATE TICKET_PRODUCT
+        <set>
+            ticket_prod_no =#{ticketProdNo},
+            ticket_name =#{ticketName},
+            price  = #{price}
+        </set>
+        WHERE ticket_prod_no = #{ticketProdNo}
+    </update>
+
+
+
+</mapper>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- type에는 사용하려는 domain의 경로를 적어여한다. -->
+<mapper namespace="com.example.sstv.deal.DAO.ExchangeDAO">
+
+    <resultMap id="exchangeSelectMap" type="com.example.sstv.deal.Exchange">
+        <result property="userId" 		column="user_id" 			jdbcType="VARCHAR" />
+        <result property="exchangeDate" 		column="exchange_date" 	jdbcType="TIMESTAMP" />
+        <result property="exchangeAccount"     column="exchange_account"            jdbcType="NUMERIC" />
+        <result property="exchangeAmount"     column="exchange_amount"            jdbcType="NUMERIC" />
+        <result property="exchangeDate"     column="exchange_date"       jdbcType="TIMESTAMP" />
+        <result property="exchangeBank" column="exchange_bank" jdbcType="NUMERIC" />
+        <result property="exchangeAcc" column="exchange_acc" jdbcType="NUMERIC"/>
+
+    </resultMap>
+    <resultMap id="userSelectMap" type="com.example.sstv.user.User">
+        <result property="userId" column="user_id" jdbcType="VARCHAR" />
+        <result property="coin" column="coin" jdbcType="NUMERIC" />
+        <result property="userNickname" column="user_nickname" jdbcType="VARCHAR" />
+    </resultMap>
+    <!-- 환전하기-->
+    <insert id="addExchange" parameterType="com.example.sstv.deal.Exchange">
+        INSERT INTO EXCHANGE(user_id,exchange_date, exchange_bank,exchange_account,exchange_amount,exchange_acc )
+        VALUES (#{userId},NOW(),#{exchangeBank},#{exchangeAccount},#{exchangeAmount},#{exchangeAcc})
+    </insert>
+    <!-- 환전목록-->
+    <select id="getExchangeList" parameterType="String" resultMap="exchangeSelectMap">
+        SELECT
+        e.EXCHANGE_DATE,e.USER_ID, e.EXCHANGE_AMOUNT,
+        e.EXCHANGE_ACCOUNT,e.EXCHANGE_BANK, e.EXCHANGE_ACC
+        FROM EXCHANGE e
+        JOIN USER u ON e.USER_ID = u.USER_ID
+        WHERE e.USER_ID =#{userId}
+    </select>
+<!--    환전승인리스트 (관리자)-->
+    <select id="getExchangeRequestList" parameterType="String" resultMap="exchangeSelectMap">
+        SELECT
+        e.EXCHANGE_DATE,e.USER_ID, e.EXCHANGE_AMOUNT, e.EXCHANGE_ACCOUNT, e.EXCHANGE_ACC
+        FROM EXCHANGE e
+        JOIN USER u ON e.USER_ID = u.USER_ID
+        WHERE e.USER_ID =#{userId}
+    </select>
+    <!--   환전처리 여부(관리자)  -->
+    <update id="exchangeAcc" parameterType="com.example.sstv.deal.Exchange">
+        UPDATE EXCHANGE
+        <set>
+            <choose>
+                <!--    심사중    -->
+                <when test="exchangeAcc == 0">
+                    exchange_acc = 0
+                </when>
+                <!--    승인    -->
+                <when test="exchangeAcc == 1">
+                    exchange_acc = 1
+                </when>
+                <!--    거절    -->
+                <when test="exchangeAcc == 2">
+                    exchange_acc = 2
+                </when>
+            </choose>
+        </set>
+        WHERE user_id = #{userId}
+    </update>
+</mapper>

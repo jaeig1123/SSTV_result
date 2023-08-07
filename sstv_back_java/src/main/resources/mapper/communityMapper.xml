@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- type에는 사용하려는 domain의 경로를 적어여한다. -->
+<mapper namespace="com.example.sstv.community.DAO.CommunityDAO">
+
+    <resultMap id="vodSelectMap" type="com.example.sstv.community.Vod">
+        <result property="vodNo" 		column="vod_no" 			jdbcType="NUMERIC" />
+        <result property="hostUserId" 		column="host_user_id" 			jdbcType="VARCHAR" />
+        <result property="guestUserId" 		column="guest_user_id" 			jdbcType="VARCHAR" />
+        <result property="title" 		column="title" 			jdbcType="VARCHAR" />
+        <result property="regDate" 		column="reg_date" 			jdbcType="TIMESTAMP" />
+        <result property="content" 		column="content" 			jdbcType="VARCHAR" />
+        <result property="fileName" column="file_name"      jdbcType="VARCHAR" />
+        <result property="view"       column="view"             jdbcType="NUMERIC" />
+        <result property="category"       column="category"             jdbcType="NUMERIC" />
+        <result property="hostNickName" column="hostnickname"           jdbcType="VARCHAR" />
+<!--        <result property="commentCount" column="comment_count"      jdbcType="NUMERIC" />-->
+
+
+<!--        <collection property="vodComments" ofType="com.example.sstv.community.VodComments">-->
+<!--            <result property="vodCommentsNo" 		column="comments_no" 			jdbcType="NUMERIC" />-->
+<!--            <result property="commentUserId" 		column="comments_user_id" 			jdbcType="VARCHAR" />-->
+<!--            <result property="vodNo" 		column="vod_no" 			jdbcType="NUMERIC" />-->
+<!--            <result property="commentContent" 		column="comment_content" 			jdbcType="VARCHAR" />-->
+<!--            <result property="regDate" 		column="reg_date" 			jdbcType="TIMESTAMP" />-->
+<!--        </collection>-->
+
+
+    </resultMap>
+
+    <resultMap id="communitySelectMap" type="com.example.sstv.community.Community">
+        <result property="writingNo" 		column="writing_no" 			jdbcType="NUMERIC" />
+        <result property="hostUserId" 		column="host_user_id" 			jdbcType="VARCHAR" />
+        <result property="guestUserId" 		column="guest_user_id" 			jdbcType="VARCHAR" />
+        <result property="title" 		column="title" 			jdbcType="VARCHAR" />
+        <result property="regDate" 		column="reg_date" 			jdbcType="TIMESTAMP" />
+        <result property="content" 		column="content" 			jdbcType="VARCHAR" />
+        <result property="commentCount" column="comment_count"      jdbcType="NUMERIC" />
+        <result property="notice"       column="notice"             jdbcType="TIMESTAMP" />
+        <result property="view"       column="view"             jdbcType="NUMERIC" />
+        <result property="up"       column="up"             jdbcType="NUMERIC" />
+        <result property="hostNickName" column="host_nickname" jdbcType="VARCHAR" />
+        <result property="guestNickName" column="guset_nickname" jdbcType="VARCHAR" />
+
+        <collection property="comments" ofType="com.example.sstv.community.Comments">
+            <result property="commentsNo" 		column="comments_no" 			jdbcType="NUMERIC" />
+            <result property="commentsUserId" 		column="comments_user_id" 			jdbcType="VARCHAR" />
+            <result property="writingNo" 		column="writing_No" 			jdbcType="NUMERIC" />
+            <result property="replayNo" 		column="replay_no" 			jdbcType="NUMERIC" />
+            <result property="commentContent" 		column="comment_content" 			jdbcType="VARCHAR" />
+            <result property="regDate" 		column="reg_date" 			jdbcType="TIMESTAMP" />
+        </collection>
+
+
+
+    </resultMap>
+
+    <resultMap id="vodCommentsSelectMap" type="com.example.sstv.community.VodComments">
+        <result property="vodCommentsNo" 		column="comments_no" 			jdbcType="NUMERIC" />
+        <result property="commentsUserId" 		column="comments_user_id" 			jdbcType="VARCHAR" />
+        <result property="vodNo" 		column="vod_no" 			jdbcType="NUMERIC" />
+        <result property="commentContent" 		column="comment_content" 			jdbcType="VARCHAR" />
+        <result property="regDate" 		column="reg_date" 			jdbcType="TIMESTAMP" />
+
+    </resultMap>
+
+    <resultMap id="commentsSelectMap" type="com.example.sstv.community.Comments">
+        <result property="commentsNo" 		column="comments_no" 			jdbcType="NUMERIC" />
+        <result property="commentsUserId" 		column="comments_user_id" 			jdbcType="VARCHAR" />
+        <result property="writingNo" 		column="writing_No" 			jdbcType="NUMERIC" />
+        <result property="replayNo" 		column="replay_no" 			jdbcType="NUMERIC" />
+        <result property="commentContent" 		column="comment_content" 			jdbcType="VARCHAR" />
+        <result property="regDate" 		column="reg_date" 			jdbcType="TIMESTAMP" />
+        <result property="commentCount" column="comment_count" jdbcType="NUMERIC"/>
+    </resultMap>
+
+    <resultMap id="streamingSelectMap" type="com.example.sstv.community.Streaming">
+        <result property="streamingNo" 		column="streaming_no" 			jdbcType="NUMERIC" />
+        <result property="userId" 		column="user_id" 			jdbcType="VARCHAR" />
+        <result property="streamingCategory" 		column="streaming_category" 			jdbcType="NUMERIC" />
+        <result property="streamingTitle" 		column="streaming_title" 			jdbcType="NUMERIC" />
+        <result property="recordUrl" 		column="record_url" 			jdbcType="VARCHAR" />
+        <result property="streamingStartTime" 		column="streaming_start_time" 			jdbcType="TIMESTAMP" />
+        <result property="streamingEndTime" 		column="reg_date" 			jdbcType="TIMESTAMP" />
+
+    </resultMap>
+
+    <select 	id="finishStreaming"	parameterType="com.example.sstv.community.Streaming"	resultMap="streamingSelectMap">
+        select *
+        FROM STREAMING
+        WHERE STREAMING_NO = #{streamingNo}
+    </select>
+
+    <select 	id="getVod"	parameterType="com.example.sstv.community.Vod"	resultMap="vodSelectMap">
+        select *
+        FROM VOD
+        WHERE VOD_NO = #{vodNo}
+    </select>
+
+
+    <select 	id="getWriting"	parameterType="com.example.sstv.community.Community"	resultMap="communitySelectMap">
+        select *
+        FROM WRITING
+        LEFT JOIN COMMENTS ON WRITING.writing_no = COMMENTS.writing_no
+        WHERE WRITING.WRITING_NO = #{writingNo}
+    </select>
+
+<!--    <select 	id="getWritingList"	parameterType="com.example.sstv.community.Community"	resultMap="communitySelectMap">-->
+
+
+<!--        SELECT WRITING.*, COUNT(COMMENTS.writing_no) AS comment_count-->
+<!--        FROM WRITING-->
+<!--        LEFT JOIN COMMENTS ON WRITING.writing_no = COMMENTS.writing_no-->
+<!--        GROUP BY WRITING.writing_no-->
+<!--        ORDER BY reg_date desc;-->
+<!--    </select>-->
+
+    <select id="getWritingList" parameterType="com.example.sstv.community.Community" resultMap="communitySelectMap">
+        SELECT WRITING.*, COUNT(COMMENTS.writing_no) AS comment_count
+        FROM WRITING
+        LEFT JOIN COMMENTS ON WRITING.writing_no = COMMENTS.writing_no
+        WHERE host_user_id = #{hostUserId}
+        GROUP BY WRITING.writing_no
+        ORDER BY reg_date desc
+    </select>
+
+    <select id="getWritingCount"	resultType="int">
+        SELECT
+        COUNT(*) AS writing_no
+        FROM WRITING
+        WHERE host_user_id = #{hostUserId}
+    </select>
+
+    <delete  id="deleteWriting" >
+        DELETE from WRITING  where writing_no = #{writing_no}
+    </delete>
+
+    <update id="updateWriting" parameterType="com.example.sstv.community.Community">
+        UPDATE WRITING
+        SET title = #{title},
+        content = #{content}
+        WHERE writing_no = #{writingNo}
+    </update>
+
+    <insert id="addWriting" parameterType="com.example.sstv.community.Community">
+        INSERT INTO WRITING ( HOST_USER_ID, GUEST_USER_ID, TITLE, REG_DATE, CONTENT )
+        VALUES
+        ( #{hostUserId}, #{guestUserId}, #{title}, CURRENT_TIMESTAMP(), #{content} )
+    </insert>
+
+    <insert id="addVod" parameterType="com.example.sstv.community.Vod">
+        INSERT INTO VOD ( HOST_USER_ID, GUEST_USER_ID, TITLE, REG_DATE, CONTENT, FILE_NAME, CATEGORY )
+        VALUES
+        ( #{hostUserId}, #{guestUserId}, #{title}, CURRENT_TIMESTAMP(), #{content} , #{fileName} , #{category})
+    </insert>
+
+    <insert id="addWritingNotice" parameterType="com.example.sstv.community.Community">
+        INSERT INTO WRITING ( HOST_USER_ID, GUEST_USER_ID, TITLE, REG_DATE, CONTENT, NOTICE )
+        VALUES
+        ( #{hostUserId}, #{guestUserId}, #{title}, CURRENT_TIMESTAMP(), #{content}, CURRENT_TIMESTAMP() )
+    </insert>
+
+    <insert id="addComments" parameterType="com.example.sstv.community.Comments">
+        INSERT INTO COMMENTS ( comments_user_id, writing_no, replay_no, comment_content, reg_date )
+        VALUES
+        ( #{commentsUserId}, #{writingNo}, #{replayNo}, #{commentContent}, CURRENT_TIMESTAMP() )
+    </insert>
+
+    <insert id="addVodComments" parameterType="com.example.sstv.community.Comments">
+        INSERT INTO VOD_COMMENTS ( comments_user_id, vod_no, comment_content, reg_date )
+        VALUES
+        ( #{commentsUserId}, #{vodNo}, #{commentContent}, CURRENT_TIMESTAMP() )
+    </insert>
+
+    <select 	id="getCommentsList"	parameterType="com.example.sstv.community.Comments"	resultMap="commentsSelectMap">
+        SELECT
+        *
+        FROM COMMENTS
+        WHERE writing_no = #{writing_no}
+    </select>
+
+    <select 	id="getVodCommentsList"	parameterType="com.example.sstv.community.VodComments"	resultMap="vodCommentsSelectMap">
+        SELECT
+        *
+        FROM VOD_COMMENTS
+        WHERE vod_no = #{vod_no}
+    </select>
+
+    <select id="getVodCommentCount" resultType="int">
+        SELECT COUNT(*) AS COMMENT_COUNT
+        FROM
+        VOD_COMMENTS
+        WHERE VOD_NO = #{vod_no}
+    </select>
+
+    <delete  id="deleteComments" >
+        DELETE from COMMENTS where comments_no = #{comments_no}
+    </delete>
+
+    <select id="getSearchWriting" parameterType="com.example.sstv.common.Search" resultMap="communitySelectMap">
+        SELECT WRITING.*, COUNT(COMMENTS.writing_no) AS comment_count
+        FROM WRITING
+        LEFT JOIN COMMENTS ON WRITING.writing_no = COMMENTS.writing_no
+        WHERE WRITING.title LIKE CONCAT('%', #{searchKeyword}, '%')
+        OR WRITING.content LIKE CONCAT('%', #{searchKeyword}, '%')
+        GROUP BY WRITING.writing_no
+        ORDER BY WRITING.reg_date DESC
+    </select>
+
+    <update id="addView" parameterType="int">
+        UPDATE WRITING
+        SET view = view + 1
+        WHERE writing_no = #{writing_no}
+    </update>
+
+    <update id="addVodView" parameterType="int">
+        UPDATE VOD
+        SET view = view + 1
+        WHERE vod_no = #{vod_no}
+    </update>
+
+    <update id="addNotice" parameterType="int">
+        UPDATE WRITING
+        SET notice = CURRENT_TIMESTAMP()
+        WHERE writing_no = #{writing_no}
+    </update>
+
+    <select id="getNotice" resultMap="communitySelectMap">
+        SELECT *
+        FROM WRITING
+        WHERE host_user_id = #{host_user_id}
+        ORDER BY notice DESC
+        LIMIT 1;
+    </select>
+
+    <select id="getVodList" resultMap="vodSelectMap">
+        SELECT *
+        FROM VOD
+        WHERE host_user_id = #{host_user_id}
+        ORDER BY reg_date DESC;
+    </select>
+
+    <select id="getAllVodList" resultMap="vodSelectMap">
+        SELECT *
+        FROM VOD
+        ORDER BY VIEW DESC;
+    </select>
+
+
+
+
+</mapper>
+

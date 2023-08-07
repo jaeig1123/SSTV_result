@@ -1,0 +1,91 @@
+@charset "euc-kr";
+
+body {background:#fff;}
+
+/* layout */
+.wrap{width:960px; margin:0 auto; text-align:left}
+#header{width:960px; margin:0 auto}
+#header .gnb{width:960px;}
+#container{width:960px; margin:10px auto 0; overflow:hidden;}
+.snb{float:left; width:200px; padding-bottom:80px}
+.bg_white {background:#fff}
+.content{float:right; width:740px; padding-bottom:45px}
+
+#footer {
+	width:960px;
+	margin:0 auto;
+	clear:both;
+	border-top:1px solid #d1d1d1;
+	overflow:hidden;
+	margin-top:57px;
+	padding-top:15px;
+	text-align:center;
+	}
+#footer ul {}
+#footer li {font-size:11px;padding:0 6px 0 6px;color:#5f5f5f;display:inline;white-space:nowrap;letter-spacing:-1px;}
+#footer li a {color:#5f5f5f;}
+#footer .first-child {background:none;}
+#footer .copyright {padding:12px 0 30px;font-family:tahoma;font-size:12px;color:#5f5f5f;font-weight:bold;letter-spacing:-1px}
+
+/* 시청하기,방송하기
+.show_broad   {height:90px; overflow:hidden}
+.show_broad li{float:left;}
+.show_broad li img {vertical-align:top}
+.show_broad li.first {float:left; margin-right:6px} */
+
+/* 시청하기 방송하기 new */
+.left_ctl_btn *{margin:0;padding:0;}
+.left_ctl_btn{position:relative;width:200px;height:107px;}
+.left_ctl_btn a{position:absolute;display:block;width:78px;height:78px;text-indent:-9999px;overflow:hidden;}
+.left_ctl_btn .ctl_view{top:14px;left:16px;}
+.left_ctl_btn .ctl_broad{top:14px;right:16px;}
+.btn_installplay2{margin:0;padding:0 0 5px 0;clear:both;background:#fff}
+.btn_installplay2 img {vertical-align:top}
+
+/* 시청하기,방송하기 20120720 */
+.broad_wrap{position:relative;padding-bottom:10px;width:100%}
+.broad_wrap img {vertical-align:top}
+.show_broad{float:left;padding-bottom:2px;}
+.show_broad li{float:left;line-height:0;font-size:0;position:relative}
+.show_broad li.last {padding-left:1px}
+	/*110609*/
+.show_broad li img.beta{position:absolute;top:-3px;left:6px}
+
+/*120817*/
+.cast_btn  {position:relative;width:200px;height:87px;}
+.cast_btn button {display:block;overflow:hidden;border:0 none;cursor:pointer;padding:0;margin:0;text-indent:-9999px;background:none}
+.cast_btn .play_app {position:absolute;top:0;left:3px;width:66px;height:80px;}
+.cast_btn .play_web {position:absolute;top:0;left:69px;width:63px;height:80px;}
+.cast_btn .play_cast {position:absolute;top:0;left:132px;width:66px;height:80px;}
+
+
+/* 고객센터 메뉴 */
+.lnb_cs {
+	position:relative;
+	overflow:hidden;
+	width:200px;
+	height:169px;
+	margin-top:5px;
+}
+* html .lnb_cs {float:left;}
+*:first-child+html .lnb_cs {float:left;}
+.lnb_cs h2 {
+	position:absolute;
+	top:5px;
+	left:13px;
+	overflow:hidden;
+}
+.lnb_cs ul {
+	padding:45px 0 0 13px;
+}
+.lnb_cs ul li img {vertical-align:top}
+
+.quik_faq {border-bottom:2px solid #7ca7e6; overflow:hidden; height:61px}
+.quik_faq li {float:left;}
+.quik_faq li  img {vertical-align:top}
+
+.quik_info {border-top:1px solid #ebebeb; border-bottom:1px solid #ebebeb; overflow:hidden; height:92px; background:#fafafa; padding:3px 0 0 13px}
+.quik_info li {float:left;}
+.quik_info li  img {vertical-align:top}
+
+.banner_fax {padding:7px 0 0 7px}

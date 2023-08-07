@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- type에는 사용하려는 domain의 경로를 적어여한다. -->
+<mapper namespace="com.example.sstv.user.DAO.UserDAO">
+
+
+    <resultMap id="userSelectMap" type="com.example.sstv.user.User">
+        <result property="userId" 			column="user_id" 			jdbcType="VARCHAR" />
+        <result property="password" 		column="passwd" 			jdbcType="VARCHAR" />
+        <result property="profilePhoto"     column="profile_photo"      jdbcType="VARCHAR" />
+        <result property="userNickname"     column="user_nickname"      jdbcType="VARCHAR" />
+        <result property="userName"         column="user_name"          jdbcType="VARCHAR" />
+        <result property="dateBirth"        column="date_birth"         jdbcType="VARCHAR" />
+        <result property="eMail"            column="email"              jdbcType="VARCHAR" />
+        <result property="phone"            column="phone"              jdbcType="VARCHAR" />
+        <result property="signDate"         column="sign_date"          jdbcType="TIMESTAMP" />
+        <result property="withdrawal"       column="withdrawal"         jdbcType="NUMERIC" />
+        <result property="withdrawalDate"   column="withdrawal_date"    jdbcType="TIMESTAMP"/>
+        <result property="roll"             column="roll"               jdbcType="VARCHAR" />
+        <result property="coin"             column="coin"               jdbcType="NUMERIC" />
+        <result property="accumulatedViewers"      column="accumulated_viewers"     jdbcType="NUMERIC" />
+        <result property="totalStreamingAccumulatedTime"     column="total_streaming_accumulated_time"      jdbcType="NUMERIC" />
+        <result property="stRoll"       column="st_roll" jdbcType="NUMERIC" />
+        <result property="userType"     column="user_type"  jdbcType="NUMERIC" />
+        <result property="followCount" column="follow_count"      jdbcType="NUMERIC" />
+    </resultMap>
+    <resultMap id="coinHistorySelectMap" type="com.example.sstv.user.CoinHistroy">
+        <result property="coin"             column="coin"               jdbcType="NUMERIC" />
+        <result property="userNickname"     column="user_nickname"      jdbcType="VARCHAR" />
+        <result property="coinHistoryNo"    column="coin_history_no"    jdbcType="NUMERIC" />
+        <result property="userId"           column="user_id"            jdbcType="VARCHAR" />
+        <result property="ticketProdNo"     column="ticket_prod_no"     jdbcType="NUMERIC" />
+        <result property="prodName"         column="prod_name"          jdbcType="NUMERIC" />
+        <result property="price"            column="price"              jdbcType="NUMERIC" />
+        <result property="payDate"          column="pay_date"           jdbcType="TIMESTAMP" />
+    </resultMap>
+
+    <!-- 회원 가입. -->
+    <insert 	id="addUser"		parameterType="com.example.sstv.user.User" >
+        INSERT
+        INTO USER( user_id , passwd, profile_photo, user_nickname, user_name, date_birth, email, phone, sign_date, withdrawal, roll, coin, accumulated_viewers, total_streaming_accumulated_time, st_roll, user_type)
+        VALUES	 (	#{userId} , #{password} , 'base_image' , #{userNickname} , #{userName} , #{dateBirth} , #{eMail} , #{phone} , NOW() , 0 , 'user' , 0 , 0 , 0 , 0 , 0)
+    </insert>
+
+    <!-- 회원 가입. -->
+    <insert 	id="addSNSUser"		parameterType="com.example.sstv.user.User" >
+        INSERT
+        INTO USER( user_id , passwd, profile_photo, user_nickname, user_name, date_birth, email, phone, sign_date, withdrawal, roll, coin, accumulated_viewers, total_streaming_accumulated_time, st_roll, user_type)
+        VALUES	 (	#{userId} , #{userId} , 'base_image' , #{userNickname} , #{userName} , #{dateBirth} , #{eMail} , #{phone} , NOW() , 0 , 'user' , 0 , 0 , 0 , 0 , 1)
+    </insert>
+
+    <!-- 회원 정보 조회. -->
+    <select 	id="getUser"	parameterType="string"	resultMap="userSelectMap">
+        SELECT
+        *
+        FROM USER
+        WHERE user_id = #{value}
+    </select>
+
+    <!-- 회원 닉네임 조회. -->
+    <select 	id="getUserNickname"	parameterType="string"	resultMap="userSelectMap">
+        SELECT
+        user_nickname
+        FROM USER
+        WHERE user_nickname = #{value}
+    </select>
+
+    <!-- 아이디 찾기. -->
+    <select 	id="findId"	parameterType="string"	resultMap="userSelectMap">
+        SELECT
+        user_id
+        FROM USER
+        WHERE phone = #{phone}
+    </select>
+
+    <!-- 비밀번호 찾기 요청 후 변경 -->
+    <update 	id="findPasswd"	parameterType="com.example.sstv.user.User">
+        UPDATE USER
+        <set>
+            passwd = #{password}
+        </set>
+        WHERE user_id = #{userId}
+    </update>
+
+    <!-- 회원 검색 -->
+    <select id="searchUser" parameterType="String" resultMap="userSelectMap">
+        SELECT
+        *
+        FROM USER
+        WHERE user_name LIKE CONCAT('%', #{value}, '%') OR user_nickname LIKE CONCAT('%', #{value}, '%')
+    </select>
+
+    <!-- 회원 탈퇴 절차 시작. -->
+    <update id="removeUserStart" parameterType="com.example.sstv.user.User" >
+        UPDATE USER
+        <set>
+            withdrawal = 1,
+            withdrawal_date = NOW()
+        </set>
+            WHERE user_id = #{userId}
+    </update>
+
+    <!-- 회원 탈퇴 취소 -->
+    <update id="removeUserCancle" parameterType="com.example.sstv.user.User" >
+        UPDATE USER
+        <set>
+            withdrawal = 0,
+            withdrawal_date = NULL
+        </set>
+        WHERE user_id = #{userId}
+    </update>
+
+    <!-- 회원 정보 수정 -->
+    <update id="updateUser" parameterType="com.example.sstv.user.User" >
+        UPDATE USER
+        <set>
+            <if test="userType == 0 and password !=null and password !=''">
+                passwd = #{password},
+            </if>
+            <if test="userType == 1">
+                user_Id = #{userId},
+            </if>
+            <if test="profilePhoto !=null and profilePhoto !=''">
+                profile_photo = #{profilePhoto},
+            </if>
+            <if test="userNickname !=null and userNickname !=''">
+                user_nickname = #{userNickname},
+            </if>
+            <if test="eMail !=null and eMail !=''">
+                email = #{eMail}
+            </if>
+            <if test="coin !=0">
+                coin = #{coin}
+            </if>
+        </set>
+        WHERE user_id = #{userId}
+    </update>
+
+    <!-- 코인 사용 이력 추가 -->
+    <insert 	id="addCoinHistory"		parameterType="com.example.sstv.user.CoinHistroy" >
+        INSERT
+        INTO COIN_HISTORY( user_id, ticket_prod_no, prod_name, price, pay_date )
+        VALUES	 (	#{userId} , #{ticketProdNo} , #{prodName} , #{price} , NOW() )
+    </insert>
+
+    <!-- 코인 변동 내역 조회. -->
+    <select 	id="getCoinHistory"	parameterType="string"	resultMap="coinHistorySelectMap">
+        SELECT
+        u.user_nickname, c.ticket_prod_no, c.prod_name, c.price, c.pay_date, u.coin
+        FROM COIN_HISTORY c, USER u
+        WHERE c.user_id = #{userId} AND c.user_id = u.user_id
+    </select>
+
+    <!-- 유저 검색 추가 -->
+    <select id="getSearchUser" parameterType="com.example.sstv.common.Search" resultMap="userSelectMap">
+        SELECT USER.*, COUNT(FAN.follow_user) AS follow_count
+        FROM USER
+        LEFT JOIN FAN ON USER.user_id = FAN.user_id
+        WHERE USER.user_id LIKE CONCAT('%', #{searchKeyword}, '%')
+        OR USER.user_nickname LIKE CONCAT('%', #{searchKeyword}, '%')
+        GROUP BY USER.user_id
+        ORDER BY follow_count DESC
+    </select>
+
+</mapper>

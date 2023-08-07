@@ -1,0 +1,9 @@
+.App {
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    /* align-items: center; */
+    height: 55vh;
+    /* padding-right: 120px; */
+  }
+  

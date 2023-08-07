@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<!-- type에는 사용하려는 domain의 경로를 적어여한다. -->
+<mapper namespace="com.example.sstv.fan.DAO.FanDAO">
+
+    <resultMap id="fanSelectMap" type="com.example.sstv.fan.Fan">
+        <result property="fanNo" 			column="fan_no" 			jdbcType="NUMERIC" />
+        <result property="userId" 			column="user_id" 			jdbcType="VARCHAR" />
+        <result property="followUser"       column="follow_user"        jdbcType="VARCHAR" />
+        <result property="blackUser"        column="black_user"         jdbcType="VARCHAR" />
+    </resultMap>
+
+    <!-- 팔로우 추가 -->
+    <insert id="addFollow" parameterType="com.example.sstv.fan.Fan" >
+        INSERT
+        INTO FAN(user_id, follow_user)
+        VALUES (#{userId}, #{followUser})
+    </insert>
+
+    <!-- 블랙리스트 추가 -->
+    <insert id="addBlacklist" parameterType="com.example.sstv.fan.Fan" >
+        INSERT
+        INTO FAN(user_id, black_user)
+        VALUES (#{userId}, #{blackUser})
+    </insert>
+    
+    <!-- 팔로우 조회 (내가 좋아요 누른 회원) -->
+    <select id="getFollow" parameterType="com.example.sstv.fan.Fan" resultMap="fanSelectMap">
+        SELECT follow_user
+        FROM FAN
+        WHERE user_id = #{value}
+        ORDER BY follow_user ASC
+    </select>
+
+    <!-- 팔로잉 조회 (나를 좋아요 누른 회원)-->
+    <select id="getFollowing" parameterType="com.example.sstv.fan.Fan" resultMap="fanSelectMap">
+        SELECT user_id
+        FROM FAN
+        WHERE follow_user = #{value}
+        ORDER BY user_id ASC
+    </select>
+
+    <!-- 자신의 블랙리스트 조회 -->
+    <select id="getBlackList" parameterType="String" resultMap="fanSelectMap">
+        SELECT black_user
+        FROM FAN
+        WHERE user_id = #{userId}
+    </select>
+
+    <!-- 블랙리스트 보유자 조회 -->
+    <select id="getBlackListOwner" parameterType="String" resultMap="fanSelectMap">
+        SELECT user_id
+        FROM FAN
+        WHERE black_user = #{value}
+    </select>
+
+    <!-- 팔로우 취소 -->
+    <delete id="removeFollow" parameterType="com.example.sstv.fan.Fan">
+        DELETE FROM FAN WHERE user_id = #{userId} AND follow_user = #{followUser}
+    </delete>
+
+    <!-- 팔로워 목록에서 삭제 -->
+    <delete id="removeFollower" parameterType="com.example.sstv.fan.Fan">
+        DELETE FROM FAN WHERE user_id = #{followUser} AND follow_user = #{userId}
+    </delete>
+
+    <!-- 블랙리스트 취소 -->
+    <delete id="removeBlacklist" parameterType="com.example.sstv.fan.Fan">
+        DELETE FROM FAN WHERE user_id = #{userId} AND black_user = #{blackUser}
+    </delete>
+
+    <!-- 회원 검색 -->
+
+</mapper>
