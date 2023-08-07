@@ -7,6 +7,17 @@
 ### ERD 
 ![ERD1](https://github.com/jcjee6276/sstv-result/assets/121541152/9bb063be-21f9-4eda-951a-60864838cb1e)
 
+### Class Diagram
+![classdiagram1](https://github.com/jcjee6276/sstv-result/assets/121541152/6d2015b3-fb04-488e-90be-eba52dc3d65b)
+
+---
+### 📃 웹 아키텍처 
+![3](https://github.com/jcjee6276/sstv-result/assets/121541152/679ddc94-9201-49a7-8f76-a2672fa96fe5)
+
+#### 사용 기술 스택
+![4](https://github.com/jcjee6276/sstv-result/assets/121541152/1e623117-e073-4b66-90f8-0f12798b1c1e)
+---
+
 
 
 ## ℹ️  프로젝트 산출물 
