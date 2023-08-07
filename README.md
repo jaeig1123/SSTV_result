@@ -23,6 +23,23 @@
     <img src="https://github.com/jcjee6276/sstv-result/assets/121541152/c0a228db-3a31-47f2-8f80-7358f654b5e2" alt="이미지1 대체 텍스트" style="flex: 1; margin: 100px;" width="750"/>
   </div>
 
+#### 2. 실시간 채팅
+> 스트리밍 시작 시, 채팅 Room이 자동 생성되며 방에 입장 한 회원이면 채팅가능
+<div style="display: flex; justify-content: center;">
+    <p align="center">
+    <img src="https://github.com/jcjee6276/sstv-result/assets/121541152/9499f2dd-750c-4919-a517-12e0128cb8f2" alt="이미지1 대체 텍스트" style="flex: 1; margin: 100px;" width="750"/>
+ </div>
+
+#### 3. 후원
+> 스트리머에게 금액을 직접 입력하여 후원 가능. 후원 시 후원자 닉네임, 금액, 메시지와 함께  
+애니메이션이 전체 송출되며 NaverCloud Clova voice를 사용하여 음성메시지 출력
+<div style="display: flex; justify-content: center;">
+    <p align="center">
+    <img src="https://github.com/jcjee6276/sstv-result/assets/121541152/e28b6dea-fbf2-4313-8e94-ca6c707059cd" alt="이미지1 대체 텍스트" style="flex: 1; margin: 100px;" width="750"/>
+ </div>
+
+
+
 ### 🔥 ERD 
 ![ERD1](https://github.com/jcjee6276/sstv-result/assets/121541152/9bb063be-21f9-4eda-951a-60864838cb1e)
 
