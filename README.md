@@ -44,13 +44,17 @@
 
 
 #### 5. VOD 업로드
+> VOD 업로드 파일 선택 시 화면에 표시될 Thumbnail image와 제목, 카테고리, 내용이 표시되며 게시버튼 클릭시
+VOD 목록에 해당 VOD가 업로드 완료됨. 업로드 클릭시 VOD가 재생되며, 댓글 기능 제공
 <div style="display: flex; justify-content: center;">
     <p align="center">
-      <img src="https://github.com/jcjee6276/sstv-result/assets/121541152/62bb0bc1-7569-4421-a00b-18c00619f3dc" alt="이미지1 대체 텍스트" style="flex: 1; margin: 100px;" width="380"/>
-      <img src="https://github.com/jcjee6276/sstv-result/assets/121541152/c95b7ca0-368c-49d9-84ab-9b5fe14bf1d2" alt="이미지1 대체 텍스트" style="flex: 1; margin: 100px;" width="380"/>
-      <img src="https://github.com/jcjee6276/sstv-result/assets/121541152/eb8ab368-c1f7-4e8c-b7a3-089bee123b16" alt="이미지1 대체 텍스트" style="flex: 1; margin: 100px;" width="380"/>
+      <img src="https://github.com/jcjee6276/sstv-result/assets/121541152/62bb0bc1-7569-4421-a00b-18c00619f3dc" alt="이미지1 대체 텍스트" style="flex: 1; margin: 100px;" width="250"/>
+      <img src="https://github.com/jcjee6276/sstv-result/assets/121541152/c95b7ca0-368c-49d9-84ab-9b5fe14bf1d2" alt="이미지1 대체 텍스트" style="flex: 1; margin: 100px;" width="250"/>
+      <img src="https://github.com/jcjee6276/sstv-result/assets/121541152/eb8ab368-c1f7-4e8c-b7a3-089bee123b16" alt="이미지1 대체 텍스트" style="flex: 1; margin: 100px;" width="250"/>
+      <img src="https://github.com/jcjee6276/sstv-result/assets/121541152/482b2f56-bee5-4c7a-b2bd-e6859d2dd024" alt="이미지1 대체 텍스트" style="flex: 1; margin: 100px;" width="250"/>
     </p>
   </div>
+
 
 
 
