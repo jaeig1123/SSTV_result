@@ -87,6 +87,11 @@ VOD 목록에 해당 VOD가 업로드 완료됨. 업로드 클릭시 VOD가 재�
 ![1](https://github.com/jcjee6276/sstv-result/assets/121541152/2d7d04ce-c1e0-4c05-9faf-84685348c0f2)
 ---
 
+### 🚍 CI/CD 구성
+![2](https://github.com/jcjee6276/sstv-result/assets/121541152/66b8ae00-9472-4872-9f4c-c7dfd2133ac5)
+
+---
+
 
 
 
