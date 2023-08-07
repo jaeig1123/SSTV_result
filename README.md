@@ -20,7 +20,7 @@
 > 조회 수가 많은 7개의 VOD 슬라이드 화면으로 표시, 실시간 스트리밍 중인 회원을 좌측 Sidebar와 메인 화면에 Thumbnail로 각각 표시
 <div style="display: flex; justify-content: center;">
     <p align="center">
-    <img src="https://github.com/jcjee6276/sstv-result/assets/121541152/c0a228db-3a31-47f2-8f80-7358f654b5e2" alt="이미지1 대체 텍스트" style="flex: 1; margin: 100px;" width="250"/>
+    <img src="https://github.com/jcjee6276/sstv-result/assets/121541152/c0a228db-3a31-47f2-8f80-7358f654b5e2" alt="이미지1 대체 텍스트" style="flex: 1; margin: 100px;" width="500"/>
   </div>
 
 ### 🔥 ERD 
