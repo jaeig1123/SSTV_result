@@ -4,7 +4,7 @@
 진행기간: 2023년 3월 28일 ~ 2023년 6월 27일  
 사용 Skill: Docker, Express, Java, JavaScript, Jenkins, MyBatis, MySQL, NaverCloud, Node.js, React.js, Redis, SpringBoot  
 
-###💽ERD 
+### ERD 
 ![ERD1](https://github.com/jcjee6276/sstv-result/assets/121541152/9bb063be-21f9-4eda-951a-60864838cb1e)
 
 
